@@ -1,7 +1,6 @@
 //User Profile Panel
 import { useState, useEffect } from "react"
 import useAuth from "../hooks/useAuth"
-import AxiosClient from "../config/axios"
 import swal from "sweetalert"
 
 const Profile = () => {
