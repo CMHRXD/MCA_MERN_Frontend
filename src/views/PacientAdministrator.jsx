@@ -1,5 +1,4 @@
 import PacientForm from "../components/PacientForm";
-import PacientsList from "../components/pacientsList";
 import { useState } from "react";
 import {Table} from "../components/Table";
 
