@@ -111,7 +111,7 @@ export const Table = () => {
                         </button>
                         <button className=" bg-slate-800 text-base text-white m-3 p-2  text-center hover:bg-slate-600"
                             onClick={() => nextPage()} disabled={!canNextPage}>
-                            {'Siguinte'}
+                            {'Siguiente'}
                         </button>
                     </div>
                 </div>

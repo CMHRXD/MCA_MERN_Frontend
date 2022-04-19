@@ -85,7 +85,7 @@ export default function Login() {
               </form>  
                   <nav className="mt-10 lg:flex lg:justify-between">
                       <Link to="/signUp" className="block my-5 text-blue-500">¿No tienes una Cuenta? Registrate</Link>
-                      <Link to="/passwordForgot" className="block my-5 text-blue-500">Olvide mis Password</Link>
+                      <Link to="/passwordForgot" className="block my-5 text-blue-500">Olvide mi Password</Link>
                   </nav>
           
           </div>
