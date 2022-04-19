@@ -75,7 +75,7 @@ export default function Login() {
 
                   <div className="my-5">
                       <label className=" uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Password</label>
-                        <input className=" border w-full p-3 mt-3 bg-gray-50 rounded-xl" type="text" placeholder="Ingrese su Passowrd" name="password" id="password"
+                        <input type="password" className=" border w-full p-3 mt-3 bg-gray-50 rounded-xl" type="text" placeholder="Ingrese su Passowrd" name="password" id="password"
                         onChange={e => setPassword(e.target.value)}/>
                   </div>
 
