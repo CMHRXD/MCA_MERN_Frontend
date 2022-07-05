@@ -1,58 +1,49 @@
 import react from 'react';
-import { useEffect } from 'react'; 
-import { useParams, Link, useNavigate} from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import AxiosClient from '../config/axios';
 import Alert from '../components/alert';
 
-export default  function ConfirmAccount() { //<> fragment </>
-    const param= useParams();
+export default function ConfirmAccount() { //<> fragment </>
+    const param = useParams();
     const [alert, setAlert] = useState({});
-    const [confirm, setConfirm] = useState(false)
+    const [confirm, setConfirm] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        const sendToken = async()=>{
+    useEffect(() => {
+        const sendToken = async () => {
             try {
                 const url = `${import.meta.env.VITE_BACKEND_URL}/api/doctors/confirm/${param.token}`
-                const {data} = await axios.get(url);
+                const { data } = await axios.get(url);
                 setConfirm(true);
-                setAlert({
-                    msg: data.msg,
-                    error:false,
-                })
-                setTimeout(() => {
-                    navigate("/");
-                }, 2000);
+                setError(true);
+                setErrorMessage(data.msg);
 
             } catch (error) {
-                
-                setAlert({
-                    msg: error.response.data.msg,
-                    error:true,
-                })
+                setError(true);
+                setErrorMessage(error.response.data.msg);
             }
 
+            setTimeout(() => {
+                navigate("/");
+            }, 2000);
         }
         sendToken()
     }, []);
 
     return (
-      <>
-          <div>
-              <h1 className=" text-blue-600 font-black text-6xl">Confirma tu cuenta y Administra
-                <span className=" text-black"> <br></br>tus Pacientes</span>
-              </h1>
-          </div>
+        <>
+            <div className='w-full h-screen flex justify-center items-center'>
+                <div className=" shadow-lg shadow-black rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto border-0" >
+                    {error ? <p className="p-3 flex border-b-2 border-white text-white mb-5 justify-center items-center font-bold text-2xl"> {errorMessage} </p>
+                        : null}
 
-          <div className=" mt-20 md:mt-5 shadow-lg px-5 py-10 rounded bg-white" >
-            {alert.msg!=undefined && <Alert
-               msg={alert} 
-            />}
-
-            {confirm && (<Link to="/" className="block my-5 text-center text-blue-500">Inicia Sesion</Link>)}
-          </div>
-      </>
+                </div>
+            </div>
+        </>
     )
 }

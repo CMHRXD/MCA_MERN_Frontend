@@ -10,17 +10,20 @@ import Header from "../../components/Header";
 
 const Protected_Layout = () => {
 
-    const {auth,loading} = useAuth();
+  const { auth, loading } = useAuth();
 
-    if(loading)return <div>Loading...</div>;
-    
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
+      <div className="flex">
         <Header />
-          <main className="container mx-auto mt-10">
-              {auth._id ? <Outlet/> : <Navigate to="/"/>}
-          </main>
-        <Footer />
+        <main className="container mx-auto mt-10">
+          {auth._id ? <Outlet /> : <Navigate to="/" />}
+        </main>
+        {//<Footer />
+        }
+      </div>
     </>
   )
 }

@@ -1,117 +1,104 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
 import AxiosClient from '../config/axios';
-
-import Alert from "../components/alert";
+import swal from 'sweetalert';
 
 export default function SignUp() {
 
-  const [name, setName] =  useState('');
-  const [email, setEmail] =  useState('');
-  const [password, setPassword] =  useState('');
-  const [rePassword, setRePassword] =  useState('');
-  const [cell, setCell] =  useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
+  const [cell, setCell] = useState('');
   const navigate = useNavigate();
-
-  const [alert, setAlert] = useState({})
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async e => {
-      
-    e.preventDefault();
-      
-      if([name,email,password,rePassword,cell].includes('')){ //Check Empty fields
-          setAlert({msg: "Campos Vacios", error: true });
-          return;
-      }
-      if(password !== rePassword){//Check Passwords
-        setAlert({msg: "Los Passwords deben ser Iguales", error: true });
-        return;
-      }
-      if(password.length < 7){//Check Passwords length
-        setAlert({msg: "El password debe tener mas de 8 caracteres", error: true });
-        return;
-      }
 
-      try { 
-          await AxiosClient.post('/doctors', {name, email, password, cell})
-          setAlert({
-            msg: "Creado Correctamente, revise su email",
-            error:false,
-          })
-          document.querySelector('#form').reset();
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-          
-          
-      } catch (error) {
-          setAlert({
-            msg: error.response.data.msg,
-            error:true,
-          })
-      }
+    e.preventDefault();
+
+    if ([name, email, password, rePassword, cell].includes('')) { //Check Empty fields
+      setError(true);
+      setErrorMessage('Todos los campos son obligatorios');
+      return;
+    }
+    if (password !== rePassword) {//Check Passwords
+      setError(true);
+      setErrorMessage('Los password deben ser iguales');
+      return;
+    }
+    if (password.length < 7) {//Check Passwords length
+      setError(true);
+      setErrorMessage('El password debe contener un minimo de 8 caracteres');
+      return;
+    }
+
+    try {
+      await AxiosClient.post('/doctors', { name, email, password, cell })
+      setError(false);
+      swal("Exito", "Registro Exitoso","success").then(()=> navigate("/"));
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <>
-        <div>
-            <h1 className=" text-blue-600 font-black text-6xl">Crea una Cuenta y Administra  
-              <span className=" text-black"> <br></br>tus Pacientes</span>
-            </h1>
-        </div>
+      <div className='w-full h-screen flex justify-center items-center'>
 
-        <div className=" mt-20 md:mt-5 shadow-lg px-5 py-10 rounded bg-white" >
+        <form method='POST' onSubmit={handleSubmit} className=' shadow-lg shadow-black rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto border-0'>
+          <div>
+            <h1 className='text-white text-4xl font-bold uppercase text-center pb-8'>Registro</h1>
+          </div>
 
-          {alert.msg && <Alert
-            msg={alert}
-          />}
-          
-            <form action="" id='form'>
-                <div className="my-5">
-                    <label className=" uppercase text-gray-600 block text-xl font-bold" htmlFor="nombre">Nombre</label>
-                      <input className=" border w-full p-3 mt-3 bg-gray-50 rounded-xl" type="text" placeholder="Ingrese su Nombre" name={name} 
-                      onChange={e=>setName(e.target.value)} id="nombre"/>
-                </div>
+          {error ? <p className="p-3 flex border-b border-red-500 text-red-500 mb-5"> {errorMessage} </p>
+            : null}
 
-                <div className="my-5">
-                    <label className=" uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
-                      <input className=" border w-full p-3 mt-3 bg-gray-50 rounded-xl" type="text" placeholder="Ingrese su Email" name={email}
-                      onChange={e=>setEmail(e.target.value)} id="email"/>
-                </div>
+          <div className='mb-5 border-b-2 flex border-blue-500'>
+
+            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="text" placeholder="Nombre" name={name}
+              onChange={e => setName(e.target.value)} id="nombre" />
+          </div>
+
+          <div className='mb-5 border-b-2 flex border-blue-500'>
+
+            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="text" placeholder="Email" name={email}
+              onChange={e => setEmail(e.target.value)} id="email" />
+          </div>
 
 
-                <div className="my-5">
-                    <label className=" uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Password</label>
-                      <input className=" border w-full p-3 mt-3 bg-gray-50 rounded-xl" type="text" placeholder="Ingrese su Passowrd" name={password}
-                      onChange={e=>setPassword(e.target.value)} id="password"/>
-                </div>
+          <div className='mb-5 border-b-2 flex border-blue-500'>
 
-                <div className="my-5">
-                    <label className=" uppercase text-gray-600 block text-xl font-bold" htmlFor="re-password">Repetir Password</label>
-                      <input className=" border w-full p-3 mt-3 bg-gray-50 rounded-xl" type="text" placeholder="Repita su Passowrd" name={rePassword}
-                      onChange={e=>setRePassword(e.target.value)} id="re-password"/>
-                </div>
+            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="password" placeholder="Passowrd" name={password}
+              onChange={e => setPassword(e.target.value)} id="password" />
+          </div>
+
+          <div className='mb-5 border-b-2 flex border-blue-500'>
+
+            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="password" placeholder="Repita su Passowrd" name={rePassword}
+              onChange={e => setRePassword(e.target.value)} id="re-password" />
+          </div>
 
 
-                <div className="my-5">
-                    <label className=" uppercase text-gray-600 block text-xl font-bold" htmlFor="telefono">Telefono</label>
-                      <input className=" border w-full p-3 mt-3 bg-gray-50 rounded-xl" type="text" placeholder=" Ingrese su Telefono" name={cell}
-                      onChange={e=>setCell(e.target.value)} id="telefono"/>
-                </div>
+          <div className='mb-5 border-b-2 flex border-blue-500'>
 
-                <input type="submit" value="crear cuenta" 
-                       className=" bg-blue-600 text-white py-3 px-10 uppercase font-bold w-full rounded-xl mt-5 hover:cursor-pointer hover:bg-indigo-800"
-                       onClick={handleSubmit}/>
-            </form>
+            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="text" placeholder="Telefono" name={cell}
+              onChange={e => setCell(e.target.value)} id="telefono" />
+          </div>
 
-            <nav className="mt-10 lg:flex lg:justify-between">
-                    <Link to="/" className="block my-5 text-blue-500">¿Ya tienes una cuenta? Inicia Sesion</Link>
-                    <Link to="/passwordForgot" className="block my-5 text-blue-500">Olvide mis Password</Link>
-            </nav>
-        </div>
+          <input type="submit" value="Crear Cuenta"
+            className=" bg-gradient-to-r from-teal-400 to-blue-500 hover:from-blue-500 hover:to-teal-500 text-white font-semibold px-4 py-3 mt-6 rounded-2xl w-full"
+            onClick={handleSubmit} />
+
+
+          <nav className="flex flex-col md:flex-row justify-between font-semibold  pt-8">
+            <Link to="/" className="block my-5 text-white">¿Ya tienes una cuenta? Inicia Sesion</Link>
+            <Link to="/passwordForgot" className="block my-5 text-white">Olvide mis Password</Link>
+          </nav>
+        </form>
+      </div>
     </>
   )
 }

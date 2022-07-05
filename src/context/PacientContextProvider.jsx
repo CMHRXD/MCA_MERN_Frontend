@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 import AxiosClient from '../config/axios';
 import swal from 'sweetalert';
 import useAuth from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const PacientContext = createContext();
 
@@ -10,6 +11,8 @@ export const PacientContextProvider = ({ children }) => {
 
     const [pacients, setPacients] = useState([]);
     const [pacient, setPacient] = useState({});
+    const [pacientConsults, setPacientConsult] = useState("");
+    const navigate = useNavigate();
 
     //Use Effect to get pacients
     useEffect(() => {
@@ -25,7 +28,7 @@ export const PacientContextProvider = ({ children }) => {
                 return;
             }
             try {
-                const { data } = await AxiosClient.get('pacients', config);
+                const { data } = await AxiosClient.get('/pacients', config);
                 setPacients(data);
             } catch (error) {
                 console.log(error.response.data.msg, 'error');
@@ -42,12 +45,12 @@ export const PacientContextProvider = ({ children }) => {
                 Authorization: `Bearer ${userToken}`,
             }
         };
-        pacient.consult_date = new Date(pacient.consult_date).setDate(new Date(pacient.consult_date).getDate() + 1);
-        if (!pacient.id == "") {
+        if (!pacient._id == "") {
             try {
-                const { data } = await AxiosClient.put(`/pacients/${pacient.id}`, pacient, config);
+                const { data } = await AxiosClient.put(`/pacients/${pacient._id}`, pacient, config);
                 setPacients(pacients.map(pacient => pacient._id === data._id ? data : pacient));
-
+                swal("Paciente Actualizado", "El paciente se actualizó correctamente", "success");
+                navigate('/admin/pacients-table');
             } catch (error) {
                 console.log(error.response.data.msg)
             }
@@ -56,7 +59,11 @@ export const PacientContextProvider = ({ children }) => {
             try {
                 const { data } = await AxiosClient.post('/pacients', pacient, config);
                 const { createdAt, updatedAt, __v, ...newPacient } = data;
+                swal("Paciente Creado", "El paciente se creó correctamente", "success");
                 setPacients([newPacient, ...pacients]);
+                if (pacient.date) {
+                    return data;
+                };
             } catch (error) {
                 console.log(error.response.data.msg)
             }
@@ -64,9 +71,9 @@ export const PacientContextProvider = ({ children }) => {
 
     }
 
-    const editPacient =  (id) => {
-        pacients.forEach(pacient =>{
-            if(pacient._id === id) {
+    const editPacient = (id) => {
+        pacients.forEach(pacient => {
+            if (pacient._id === id) {
                 setPacient(pacient);
             }
         })
@@ -118,7 +125,7 @@ export const PacientContextProvider = ({ children }) => {
 
     return (
         <PacientContext.Provider
-            value={{pacients,setPacients, pacient, savePacient, editPacient, deletePacient, dateFormat}}>
+            value={{ pacients, setPacients, pacient, savePacient, editPacient, deletePacient, dateFormat,pacientConsults, setPacientConsult }}>
             {children}
         </PacientContext.Provider>
     )
