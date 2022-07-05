@@ -16,26 +16,28 @@ export const PacientContextProvider = ({ children }) => {
 
     //Use Effect to get pacients
     useEffect(() => {
-        const getPacients = async () => {
-            const userToken = localStorage.getItem('aph_token');
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${userToken}`,
-                }
-            };
-            if (!userToken) {
-                return;
-            }
-            try {
-                const { data } = await AxiosClient.get('/pacients', config);
-                setPacients(data);
-            } catch (error) {
-                console.log(error.response.data.msg, 'error');
-            }
-        }
         getPacients();
     }, []);
+
+    const getPacients = async () => {
+        const userToken = localStorage.getItem('aph_token');
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+            }
+        };
+        if (!userToken) {
+            return;
+        }
+        try {
+            const { data } = await AxiosClient.get('/pacients', config);
+            setPacients(data);
+        } catch (error) {
+            console.log(error.response.data.msg, 'error');
+        }
+    }
+
 
     const savePacient = async pacient => {
         const userToken = localStorage.getItem('aph_token');
@@ -125,7 +127,7 @@ export const PacientContextProvider = ({ children }) => {
 
     return (
         <PacientContext.Provider
-            value={{ pacients, setPacients, pacient, savePacient, editPacient, deletePacient, dateFormat,pacientConsults, setPacientConsult }}>
+            value={{ pacients, setPacients, pacient, savePacient, editPacient, deletePacient, dateFormat,pacientConsults, setPacientConsult,getPacients }}>
             {children}
         </PacientContext.Provider>
     )

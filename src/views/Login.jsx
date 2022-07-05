@@ -3,6 +3,12 @@ import { useState } from "react";
 import AxiosClient from "../config/axios";
 import useAuth from "../hooks/useAuth";
 import usePacients from "../hooks/usePacients";
+import useConsults from "../hooks/useConsults";
+import useServices from "../hooks/useServices";
+import useProducts from "../hooks/useProductos";
+import useDates from "../hooks/useDates";
+
+
 
 export default function Login() {
 
@@ -13,7 +19,17 @@ export default function Login() {
     const navigate = useNavigate();
 
     const { setAuth } = useAuth();
-    const { setPacients } = usePacients();
+
+    const { getPacients } = usePacients();
+
+    const { getConsults } = useConsults();
+
+    const { getServices } = useServices();
+
+    const { getProducts } = useProducts();
+
+    const { getDates } = useDates();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,23 +50,12 @@ export default function Login() {
         setError(false)
         try {
             const { data } = await AxiosClient.post("/doctors/login", { email, password })
-            setAuth(data);
-            localStorage.setItem("aph_token", data.token);
-            try {
-                const token = localStorage.getItem("aph_token");
-                const config = {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    }
-                };
-                const { data } = await AxiosClient.get("/pacients", config);
-                setPacients(data);
-                navigate("/admin/dates-table");
-            } catch (error) {
-                console.log(error.response.data.msg)
-            }
-
+            setAuth(data)
+            getPacients()
+                .then(()=>getDates())
+                .then(() => getServices())
+                .then(() => getProducts())
+                .then(() => getConsults())
         } catch (error) {
             setError(true);
             setErrorMessage(error.response.data.msg);
