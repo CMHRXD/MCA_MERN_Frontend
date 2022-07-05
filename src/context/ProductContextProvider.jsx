@@ -12,10 +12,10 @@ export const ProductContextProvider = ({ children }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getProduts();
+        getProducts();
     }, [])
 
-    const getProduts = async () => {
+    const getProducts = async () => {
         const userToken = localStorage.getItem('aph_token');
         if (!userToken) {
             return;
@@ -149,7 +149,7 @@ export const ProductContextProvider = ({ children }) => {
     }
 
     return (
-        <ProductContext.Provider value={{ products,product, saveProduct, deleteProduct, editProduct,addToCart,updateStockSelled,checkStock, carrito, setCarrito }}>
+        <ProductContext.Provider value={{ products,product, saveProduct, deleteProduct, editProduct,addToCart,updateStockSelled,checkStock, carrito, setCarrito,getProducts }}>
             {children}
         </ProductContext.Provider>
     )

@@ -141,7 +141,7 @@ export const ServiceContextProvider = ({children}) => {
 
 
   return (
-    <ServiceContext.Provider value={{service,services,editService, saveService, deleteService, addToCart, serviceCart, setServiceCart}}>
+    <ServiceContext.Provider value={{service,services,editService, saveService, deleteService, addToCart, serviceCart, setServiceCart,getServices}}>
         {children}
     </ServiceContext.Provider>
   )

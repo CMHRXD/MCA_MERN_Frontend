@@ -111,7 +111,7 @@ export const DatesContextProvider = ({ children }) => {
     }
 
     return (
-        <DatesContext.Provider value={{ dates, date, saveDate, deleteDate, editDate }}>
+        <DatesContext.Provider value={{ dates, date, saveDate, deleteDate, editDate,getDates }}>
             {children}
         </DatesContext.Provider>
     )

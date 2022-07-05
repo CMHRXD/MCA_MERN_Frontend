@@ -51,11 +51,13 @@ export default function Login() {
         try {
             const { data } = await AxiosClient.post("/doctors/login", { email, password })
             setAuth(data)
+            localStorage.setItem("aph_token", data.token);
             getPacients()
                 .then(()=>getDates())
                 .then(() => getServices())
                 .then(() => getProducts())
                 .then(() => getConsults())
+                .then(() => navigate("/admin/dates-table"))
         } catch (error) {
             setError(true);
             setErrorMessage(error.response.data.msg);

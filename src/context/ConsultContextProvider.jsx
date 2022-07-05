@@ -114,7 +114,7 @@ export const ConsultContextProvider = ({ children }) => {
   }
 
   return (
-    <ConsultContext.Provider value={{ consults, saveConsult, deleteConsult, oneConsult, setOneConsult, getConsultValues }}>
+    <ConsultContext.Provider value={{ consults, saveConsult, deleteConsult, oneConsult, setOneConsult, getConsultValues,getConsults }}>
       {children}
     </ConsultContext.Provider>
 
