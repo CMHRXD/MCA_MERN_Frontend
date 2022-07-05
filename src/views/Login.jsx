@@ -3,9 +3,9 @@ import { useState } from "react";
 import AxiosClient from "../config/axios";
 import useAuth from "../hooks/useAuth";
 import usePacients from "../hooks/usePacients";
-import useConsults from "../hooks/useConsults";
+import useConsults from "../hooks/useConsult";
 import useServices from "../hooks/useServices";
-import useProducts from "../hooks/useProductos";
+import useProducts from "../hooks/useProducts";
 import useDates from "../hooks/useDates";
 
 
