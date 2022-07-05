@@ -54,6 +54,7 @@ export default function Login() {
         } catch (error) {
             setError(true);
             setErrorMessage(error.response.data.msg);
+            console.log(error);
         }
 
 
