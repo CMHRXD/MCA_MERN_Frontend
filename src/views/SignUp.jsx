@@ -71,13 +71,13 @@ export default function SignUp() {
 
           <div className='mb-5 border-b-2 flex border-blue-500'>
 
-            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="password" placeholder="Passowrd" name={password}
+            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="password" placeholder="Password" name={password}
               onChange={e => setPassword(e.target.value)} id="password" />
           </div>
 
           <div className='mb-5 border-b-2 flex border-blue-500'>
 
-            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="password" placeholder="Repita su Passowrd" name={rePassword}
+            <input className=" bg-transparent text-white focus:outline-none w-full p-2 text-lg font-semibold placeholder-white" type="password" placeholder="Repita su Password" name={rePassword}
               onChange={e => setRePassword(e.target.value)} id="re-password" />
           </div>
 
