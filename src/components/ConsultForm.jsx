@@ -3,6 +3,7 @@ import usePacients from '../hooks/usePacients';
 import useConsult from '../hooks/useConsult';
 import useProducts from '../hooks/useProducts';
 import useServices from '../hooks/useServices';
+import { Link } from 'react-router-dom';
 
 const ConsultForm = () => {
   const [consult, setConsult] = useState({
@@ -22,7 +23,7 @@ const ConsultForm = () => {
   let TotalS = 0;
 
   const { pacients, savePacient } = usePacients();
-  const { saveConsult, oneConsult } = useConsult();
+  const { saveConsult, oneConsult, detailView } = useConsult();
   const { updateStockSelled, checkStock, carrito, setCarrito, products } = useProducts();
   const { setServiceCart, serviceCart, services } = useServices();
 
@@ -147,7 +148,7 @@ const ConsultForm = () => {
     <div>
       <form className='flex justify-center items-center mt-5'>
         <div className='bg-gradient-to-t from-[#130e5f] to-[#210c7e] shadow-lg p-5 w-[800px] rounded-lg'>
-          <h1 className='text-xl font-bold text-center text-white mb-8 border-b-2 p-3 border-blue-500'>Formulario de Consultas</h1>
+          <h1 className='text-xl font-bold text-center text-white mb-8 border-b-2 p-3 border-blue-500'>{detailView ? "Detalle de Consulta" : "Formulario de Consultas"}</h1>
 
           <div className='mb-5 border-b-2 flex border-blue-400'>
             <input type="number" maxLength={12} className='bg-transparent text-yellow-50 focus:outline-none w-full p-2 text-lg' id="c_i" name="c_i" placeholder="Cedula del Paciente"
@@ -184,6 +185,7 @@ const ConsultForm = () => {
                       <td className='text-center'>
                         <input type="number" value={product.cantToSell}
                           className="w-10 bg-transparent border-gray-300 rounded-lg text-center border-2"
+                          readOnly={detailView}
                           onChange={e => setCantidad(product._id, e.target.value)}
                         />
                       </td>
@@ -256,10 +258,14 @@ const ConsultForm = () => {
               onChange={(e) => setConsult({ ...consult, [e.target.name]: e.target.value })}
             />
           </div>
-
-          <input type="submit" value={!oneConsult._id ? "Agregar Consulta" : "Guardar Cambios"}
+          {detailView 
+            ? <Link to={"/admin/consults-table"}><input type="button" value={"Atras"}
             className=' bg-transparent border-2 rounded-lg w-full hover:bg-blue-900 cursor-pointer transition-colors checked: p-3 mt-5 uppercase text-white'
-            onClick={handleSubmit} />
+            /></Link> 
+            
+            :<input type="submit" value={!oneConsult._id ? "Agregar Consulta" : "Guardar Cambios"}
+            className=' bg-transparent border-2 rounded-lg w-full hover:bg-blue-900 cursor-pointer transition-colors checked: p-3 mt-5 uppercase text-white'
+            onClick={handleSubmit} />}
 
         </div>
       </form>

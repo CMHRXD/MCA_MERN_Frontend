@@ -6,6 +6,7 @@ const ConsultContext = createContext();
 export const ConsultContextProvider = ({ children }) => {
   const [consults, setConsults] = useState([]);
   const [oneConsult, setOneConsult] = useState({});
+  const [detailView,SetDetailView] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -114,7 +115,7 @@ export const ConsultContextProvider = ({ children }) => {
   }
 
   return (
-    <ConsultContext.Provider value={{ consults, saveConsult, deleteConsult, oneConsult, setOneConsult, getConsultValues,getConsults }}>
+    <ConsultContext.Provider value={{ consults, saveConsult, deleteConsult, oneConsult, setOneConsult, getConsultValues,getConsults, detailView, SetDetailView }}>
       {children}
     </ConsultContext.Provider>
 

@@ -6,7 +6,7 @@ import useConsult from '../hooks/useConsult';
 import usePacients from '../hooks/usePacients';
 
 const ConsultTable = () => {
-  const { consults, deleteConsult, getConsultValues } = useConsult();
+  const { consults, deleteConsult, getConsultValues, SetDetailView } = useConsult();
   const { pacientConsults } = usePacients();
 
   const navigate = useNavigate();
@@ -106,8 +106,8 @@ const ConsultTable = () => {
                       if (cell.column.Header === 'Edicion') {
                         return (
                           <td key={cell.value}>
-                            <a href="#" className="font-medium text-blue-500 hover:underline ml-5" onClick={() => { getConsultValues(cell.value, false); navigate("/admin/consults-form") }}>Detalle</a><br />
-                            <a href="#" className="font-medium text-green-500 hover:underline ml-5" onClick={() => { getConsultValues(cell.value, true); navigate("/admin/consults-form") }}>Editar</a><br />
+                            <a href="#" className="font-medium text-blue-500 hover:underline ml-5" onClick={() => { getConsultValues(cell.value, false);SetDetailView(true); navigate("/admin/consults-form") }}>Detalle</a><br />
+                            <a href="#" className="font-medium text-green-500 hover:underline ml-5" onClick={() => { getConsultValues(cell.value, true);SetDetailView(false); navigate("/admin/consults-form") }}>Editar</a><br />
                             <a href="#" className="font-medium text-red-500  hover:underline ml-5" onClick={() => deleteConsult(cell.value)}>Eliminar</a>
                           </td>
                         )
