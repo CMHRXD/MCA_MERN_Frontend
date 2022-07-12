@@ -2,8 +2,8 @@
 # MCA- Project with MERN - Tailwind -React Tables - React-Router Dom - Context - Hooks - Frontend
 #
 # Intructions for login with Demo Account: 
-# User: demo@demo.com
-# Password: demo
+## User: demo@demo.com
+## Password: demo
 #
 # Includes:
 # -Dates Form and Panel
