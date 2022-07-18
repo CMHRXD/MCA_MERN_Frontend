@@ -47,6 +47,7 @@ export default function Login() {
             setErrorMessage('Email invalido');
             return;
         }
+        
         setError(false)
         try {
             const { data } = await AxiosClient.post("/doctors/login", { email, password })
