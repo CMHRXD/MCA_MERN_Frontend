@@ -17,7 +17,7 @@ const ChangePswForm = () => {
             swal("Error", "Campos Vacios", "error");
             return;
         }
-        updatePassword(password);
+        updatePassword(newPsw);
     }
 
 
