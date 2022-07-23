@@ -6,9 +6,9 @@ const ChangePswForm = () => {
 
     const {updatePassword} = useAuth();
 
-    const [newPsw, setNewPsw] = useState({
-        oldPsw: '',
-        newPsw: '',
+    const [password, setPassword] = useState({
+        pa: '',
+        pn: '',
     });
 
     const handlePassSubmit = (e) => {
@@ -17,7 +17,7 @@ const ChangePswForm = () => {
             swal("Error", "Campos Vacios", "error");
             return;
         }
-        updatePassword(newPsw);
+        updatePassword(password);
     }
 
 
@@ -28,16 +28,16 @@ const ChangePswForm = () => {
                 <h1 className='text-xl font-bold text-center text-white mb-10 border-b-2 p-3 border-blue-500'>Editar Password</h1>
 
                 <div className='mb-5 border-b-2 flex border-blue-400'>
-                    <input type="password" maxLength={30} className='bg-transparent text-yellow-50 focus:outline-none w-full p-2 text-lg' id="oldPsw" name="oldPsw" placeholder="Password Anterior"
-                        value={newPsw.oldPsw}
-                        onChange={(e) => setNewPsw({ ...newPsw, [e.target.name]: e.target.value })}
+                    <input type="password" maxLength={30} className='bg-transparent text-yellow-50 focus:outline-none w-full p-2 text-lg' id="pa" name="pa" placeholder="Password Anterior"
+                        value={password.pa}
+                        onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                     />
                 </div>
 
                 <div className='mb-5 border-b-2 flex border-blue-400'>
-                    <input type="password" maxLength={30} className='bg-transparent text-yellow-50 focus:outline-none w-full p-2 text-lg' id="newPsw" name="newPsw" placeholder="Nuevo Password"
-                        value= {newPsw.newPsw}
-                        onChange={(e) => setNewPsw({ ...newPsw, [e.target.name]: e.target.value })}
+                    <input type="password" maxLength={30} className='bg-transparent text-yellow-50 focus:outline-none w-full p-2 text-lg' id="pn" name="pn" placeholder="Nuevo Password"
+                        value= {password.pn}
+                        onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                     />
                 </div>
 
