@@ -26,15 +26,18 @@ const Header = () => {
   const [subMenuDate, setSubMenuDate] = useState(false);
   const [subMenuConsult, setSubMenuConsult] = useState(false);
   const [subMenuProfile, setSubMenuProfile] = useState(false);
+  const [openSubMenus, setOpenSubmenus] = useState(0)
 
 
   const {logout} = useAuth();
   const {setPacientConsult} = usePacients();
 
 
+  console.log(openSubMenus)
+
   return (
     <div className=''>
-      <div className={`${open ? "w-80 left-0" : "w-20"} p-5 pt-8 duration-200 h-screen bg-gradient-to-b from-[#130e5f] to-[#210c7e] relative`}>
+      <div className={`${open ? "w-80 left-0 absolute md:relative" : "w-20 left-0 relative"} ${openSubMenus > 3 ? "h-auto": "h-screen" } p-5 pt-8 duration-200  bg-gradient-to-b from-[#130e5f] to-[#210c7e] `}>
         <img src={control} alt="" className={`${!open && "rotate-180"} absolute cursor-pointer -right-3 top-12 w-7 border-2 border-[#130e5f] rounded-full`}
           onClick={() => {
             setOpen(!open);
@@ -45,6 +48,7 @@ const Header = () => {
               setSubMenuService(false);
               setSubMenuConsult(false);
               setSubMenuProfile(false);
+              setOpenSubmenus(0)
             }
           }}
         />
@@ -69,7 +73,7 @@ const Header = () => {
                   <span className={`${!open && "hidden"} ml-8 origin-left duration-200`}>Citas</span>
                 </Link>
                 <button className='absolute right-0 p-1 flex items-center'><HiArrowNarrowRight className={`${!open && "hidden"} ${subMenuDate ? "rotate-90" : "rotate-180"} duration-200`}
-                  onClick={() => setSubMenuDate(!subMenuDate)}
+                  onClick={() => {setSubMenuDate(!subMenuDate); subMenuDate ? setOpenSubmenus(openSubMenus-1) : setOpenSubmenus(openSubMenus+1)  }}
                 /></button>
               </div>
 
@@ -91,7 +95,7 @@ const Header = () => {
                   <span className={`${!open && "hidden"} ml-8 origin-left duration-200`}>Pacientes</span>
                 </Link>
                 <button className='absolute right-0 p-1 flex items-center'><HiArrowNarrowRight className={`${!open && "hidden"} ${subMenuPacient ? "rotate-90" : "rotate-180"} duration-200`}
-                  onClick={() => setSubMenuPacient(!subMenuPacient)}
+                  onClick={() => {setSubMenuPacient(!subMenuPacient); subMenuPacient ? setOpenSubmenus(openSubMenus-1) : setOpenSubmenus(openSubMenus+1) }}
                 /></button>
               </div>
 
@@ -113,7 +117,7 @@ const Header = () => {
                   <span className={`${!open && "hidden"} ml-8 origin-left duration-200`}>Productos</span>
                 </Link>
                 <button className='absolute right-0 p-1 flex items-center'><HiArrowNarrowRight className={`${!open && "hidden"} ${subMenuProducts ? "rotate-90" : "rotate-180"} duration-200`}
-                  onClick={() => setSubMenuProducts(!subMenuProducts)}
+                  onClick={() => {setSubMenuProducts(!subMenuProducts); subMenuProducts ? setOpenSubmenus(openSubMenus-1) : setOpenSubmenus(openSubMenus+1)}}
                 /></button>
               </div>
 
@@ -134,7 +138,7 @@ const Header = () => {
                   <span className={`${!open && "hidden"} ml-8 origin-left duration-200`}>Servicios</span>
                 </Link>
                 <button className='absolute right-0 p-1 flex items-center'><HiArrowNarrowRight className={`${!open && "hidden"} ${subMenuService ? "rotate-90" : "rotate-180"} duration-200`}
-                  onClick={() => setSubMenuService(!subMenuService)}
+                  onClick={() => {setSubMenuService(!subMenuService); subMenuService ? setOpenSubmenus(openSubMenus-1) : setOpenSubmenus(openSubMenus+1)}}
                 /></button>
               </div>
 
@@ -155,7 +159,7 @@ const Header = () => {
                   <span className={`${!open && "hidden"} ml-8 origin-left duration-200`}>Consultas</span>
                 </Link>
                 <button className='absolute right-0 p-1 flex items-center'><HiArrowNarrowRight className={`${!open && "hidden"} ${subMenuConsult ? "rotate-90" : "rotate-180"} duration-200`}
-                  onClick={() => setSubMenuConsult(!subMenuConsult)}
+                  onClick={() => {setSubMenuConsult(!subMenuConsult); subMenuConsult ? setOpenSubmenus(openSubMenus-1) : setOpenSubmenus(openSubMenus+1)}}
                 /></button>
               </div>
 
@@ -176,7 +180,7 @@ const Header = () => {
                   <span className={`${!open && "hidden"} ml-8 origin-left duration-200`}>Perfil</span>
                 </Link>
                 <button className='absolute right-0 p-1 flex items-center'><HiArrowNarrowRight className={`${!open && "hidden"} ${subMenuProfile ? "rotate-90" : "rotate-180"} duration-200`}
-                  onClick={() => setSubMenuProfile(!subMenuProfile)}
+                  onClick={() => {setSubMenuProfile(!subMenuProfile); subMenuProfile ? setOpenSubmenus(openSubMenus-1) : setOpenSubmenus(openSubMenus+1)}}
                 /></button>
               </div>
 

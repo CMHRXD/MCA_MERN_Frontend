@@ -88,14 +88,14 @@ const ConsultForm = () => {
     consult.total = totalP + TotalS;
 
     //Update Product stock selled and Return Products Ids
-    if (oneConsult._id) { 
+    if (oneConsult._id) {
       consult.products = carrito.map(product => {
         let newCant = 0;
 
-        if(product.cantToSell > product.cantSelled){
+        if (product.cantToSell > product.cantSelled) {
           newCant = product.cantToSell - product.cantSelled;
-        }else{
-          newCant = (product.cantSelled - product.cantToSell) *-1;
+        } else {
+          newCant = (product.cantSelled - product.cantToSell) * -1;
         }
 
         //console.log(newCant);
@@ -104,7 +104,7 @@ const ConsultForm = () => {
         return { _id: product._id, cantToSell: product.cantToSell };
       });
 
-     // console.log(consult.products);
+      // console.log(consult.products);
     }
     else {
       consult.products = carrito.map(product => {
@@ -145,8 +145,8 @@ const ConsultForm = () => {
   }
 
   return (
-    <div>
-      <form className='flex justify-center items-center mt-5'>
+    <>
+      <form className='flex justify-center items-center mt-5 ml-40 md:ml-0'>
         <div className='bg-gradient-to-t from-[#130e5f] to-[#210c7e] shadow-lg p-5 w-[800px] rounded-lg'>
           <h1 className='text-xl font-bold text-center text-white mb-8 border-b-2 p-3 border-blue-500'>{detailView ? "Detalle de Consulta" : "Formulario de Consultas"}</h1>
 
@@ -258,18 +258,18 @@ const ConsultForm = () => {
               onChange={(e) => setConsult({ ...consult, [e.target.name]: e.target.value })}
             />
           </div>
-          {detailView 
+          {detailView
             ? <Link to={"/admin/consults-table"}><input type="button" value={"Atras"}
-            className=' bg-transparent border-2 rounded-lg w-full hover:bg-blue-900 cursor-pointer transition-colors checked: p-3 mt-5 uppercase text-white'
-            /></Link> 
-            
-            :<input type="submit" value={!oneConsult._id ? "Agregar Consulta" : "Guardar Cambios"}
-            className=' bg-transparent border-2 rounded-lg w-full hover:bg-blue-900 cursor-pointer transition-colors checked: p-3 mt-5 uppercase text-white'
-            onClick={handleSubmit} />}
+              className=' bg-transparent border-2 rounded-lg w-full hover:bg-blue-900 cursor-pointer transition-colors checked: p-3 mt-5 uppercase text-white'
+            /></Link>
+
+            : <input type="submit" value={!oneConsult._id ? "Agregar Consulta" : "Guardar Cambios"}
+              className=' bg-transparent border-2 rounded-lg w-full hover:bg-blue-900 cursor-pointer transition-colors checked: p-3 mt-5 uppercase text-white'
+              onClick={handleSubmit} />}
 
         </div>
       </form>
-    </div>
+    </>
   )
 }
 
