@@ -88,7 +88,7 @@ export default function Login() {
                             onChange={e => setPassword(e.target.value)} />
                     </div>
 
-                    <button className='bg-gradient-to-r from-teal-400 to-blue-500 hover:from-blue-500 hover:to-teal-500 text-white font-semibold px-4 py-3 mt-6 rounded-2xl w-full'>Acceder</button>
+                    <button className='   hover:from-blue-500 hover:to-teal-500 text-white font-semibold px-4 py-3 mt-6 rounded-2xl w-full'>Acceder</button>
 
                     <div className='flex flex-col md:flex-row justify-between font-semibold  pt-8'>
                         <Link to="/signUp" className="block my-3 text-white">¿No tienes una Cuenta? Registrate</Link>
