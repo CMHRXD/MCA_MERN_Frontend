@@ -15,7 +15,8 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.2.2",
     "react-table": "^7.7.0",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "tailwindcss-hero-patterns": "^0.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",

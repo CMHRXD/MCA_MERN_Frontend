@@ -74,7 +74,7 @@ export const PacientTable = () => {
 
             <div className='container '>
                 <div className='flex flex-col items-center w-full'>
-                    <h1 className='m-5 text-xl font-bold uppercase'>Listado de Pacientes 2</h1>
+                    <h1 className='m-5 text-xl font-bold uppercase'>Listado de Pacientes</h1>
                     <GloablFilter filter={globalFilter} setFilter={setGlobalFilter} text="Buscar paciente" />
                 </div>
 

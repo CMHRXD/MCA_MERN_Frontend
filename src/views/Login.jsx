@@ -47,14 +47,14 @@ export default function Login() {
             setErrorMessage('Email invalido');
             return;
         }
-        
+
         setError(false)
         try {
             const { data } = await AxiosClient.post("/doctors/login", { email, password })
             setAuth(data)
             localStorage.setItem("aph_token", data.token);
             getPacients()
-                .then(()=>getDates())
+                .then(() => getDates())
                 .then(() => getServices())
                 .then(() => getProducts())
                 .then(() => getConsults())
@@ -70,7 +70,7 @@ export default function Login() {
     return (
         <>
             <div className='w-full h-screen flex justify-center items-center'>
-                <form method='POST' onSubmit={handleSubmit} className=' shadow-lg shadow-black rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto border-0'>
+                <form method='POST' onSubmit={handleSubmit} className=' bg-sky-700 shadow-lg shadow-black rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto border-0'>
                     <div>
                         <h1 className='text-white text-4xl font-bold uppercase text-center pb-8'>Login</h1>
                     </div>
@@ -88,7 +88,7 @@ export default function Login() {
                             onChange={e => setPassword(e.target.value)} />
                     </div>
 
-                    <button className='   hover:from-blue-500 hover:to-teal-500 text-white font-semibold px-4 py-3 mt-6 rounded-2xl w-full'>Acceder</button>
+                    <button className=' bg-gradient-to-r from-teal-400 to-blue-500  hover:from-blue-500 hover:to-teal-500 text-white font-semibold px-4 py-3 mt-6 rounded-2xl w-full'>Acceder</button>
 
                     <div className='flex flex-col md:flex-row justify-between font-semibold  pt-8'>
                         <Link to="/signUp" className="block my-3 text-white">¿No tienes una Cuenta? Registrate</Link>

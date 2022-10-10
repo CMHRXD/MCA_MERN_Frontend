@@ -38,7 +38,7 @@ export default function ConfirmAccount() { //<> fragment </>
     return (
         <>
             <div className='w-full h-screen flex justify-center items-center'>
-                <div className=" shadow-lg shadow-black rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto border-0" >
+                <div className=" bg-sky-700 shadow-lg shadow-black rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto border-0" >
                     {error ? <p className="p-3 flex border-b-2 border-white text-white mb-5 justify-center items-center font-bold text-2xl"> {errorMessage} </p>
                         : null}
 
