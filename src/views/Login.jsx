@@ -70,7 +70,7 @@ export default function Login() {
     return (
         <>
             <div className='w-full h-screen flex justify-center items-center'>
-                <form method='POST' onSubmit={handleSubmit} className=' bg-sky-700 shadow-lg shadow-black rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto border-0'>
+                <form method='POST' onSubmit={handleSubmit} className=' bg-sky-700 shadow-lg shadow-blue-500 rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto border-0'>
                     <div>
                         <h1 className='text-white text-4xl font-bold uppercase text-center pb-8'>Login</h1>
                     </div>

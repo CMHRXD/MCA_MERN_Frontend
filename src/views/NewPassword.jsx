@@ -68,7 +68,7 @@ const NewPassword = () => {
             <div className=" w-full h-screen flex justify-center items-center" >
 
 
-                <form action="" id="form" onSubmit={handleSubmit} className=" bg-sky-700 shadow-lg shadow-black  rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto">
+                <form action="" id="form" onSubmit={handleSubmit} className=" bg-sky-700 shadow-lg shadow-blue-500  rounded-lg p-8 w-full max-w-[600px] h-screen md:h-auto">
                     <div>
                         <h1 className='text-white text-4xl font-bold uppercase text-center pb-8 mb-5'>Actualizar Contraseña</h1>
                     </div>
