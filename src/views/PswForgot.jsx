@@ -45,7 +45,7 @@ export default function PswForgot() {
             <h1 className='text-white text-4xl font-bold uppercase text-center pb-8 mb-5'>Restablecer Password</h1>
           </div>
 
-          {error ? <p className="p-3 flex border-b-2 border-red-500 text-red-500 mb-6"> {errorMessage} </p>
+          {error ? <p className="p-3 flex border-b-2 border-red-900 text-red-900 font-bold mb-6"> {errorMessage} </p>
             : null}
 
           {notification ? <p className="p-3 flex border-b-2 border-white text-white mb-6"> {errorMessage} </p>

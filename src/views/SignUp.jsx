@@ -53,8 +53,8 @@ export default function SignUp() {
             <h1 className='text-white text-4xl font-bold uppercase text-center pb-8'>Registro</h1>
           </div>
 
-          {error ? <p className="p-3 flex border-b border-red-500 text-red-500 mb-5"> {errorMessage} </p>
-            : null}
+          {error ? <p className="p-2 flex border-b-4 border-white text-white font-bold mb-5"> {errorMessage} </p>
+                        : null}
 
           <div className='mb-5 border-b-2 flex border-blue-500'>
 
